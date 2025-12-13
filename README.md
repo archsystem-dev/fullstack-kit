@@ -1,4 +1,4 @@
-# Kit de Développement Full-Stack FastAPI + Frontend Moderne
+# Kit de Développement Full-Stack
 
 Ce kit fournit un ensemble complet de scripts Bash pour créer, configurer, développer et déployer des projets web full-stack :
 - **Backend** : FastAPI (Python) dans un environnement Conda dédié
