@@ -168,7 +168,3 @@ Le kit est conçu pour être étendu :
 - Ajouter des paquets dans `requirements.txt`
 - Modifier `nginx.conf` pour HTTPS, domaines, etc.
 - Adapter les scripts pour d’autres stacks (Next.js, Nuxt…)
-
-## Licence
-
-MIT – Libre d’utilisation, modification et redistribution.
