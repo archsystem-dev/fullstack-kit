@@ -1,47 +1,36 @@
-------------------------------------------------------------------------------
-Nom du script       : install_packages.sh
-Version             : 1.0.0
-Auteur              : archsystem-dev
-Date de modification: 13 décembre 2025
-Description         : Installe les dépendances Python (via pip dans l'environnement
-                      Conda dédié) et Node.js (via npm) pour le backend et le frontend
-                      du projet, en respectant les fichiers requirements.txt et package.json.
-------------------------------------------------------------------------------
+# install_packages.sh
+___
 
 ## Objectif du script
-
-Installer de manière fiable et reproductible toutes les dépendances nécessaires au projet (Python pour le backend FastAPI et Node.js pour le frontend Vue.js/Express).
+Installe les dépendances Python (via pip dans l'environnement Conda dédié) et Node.js (via npm) pour le backend et le frontend du projet, en respectant les fichiers requirements.txt et package.json.
 
 ## Ce que fait le script étape par étape
-
-1. Récupère les chemins absolus et le nom du projet.
-2. Vérifie la présence des dossiers backend/, frontend/ et de l'environnement Conda.
-3. Active l'environnement Conda dédié au backend.
-4. Installe ou met à jour les dépendances Python listées dans `backend/requirements.txt`.
-5. Passe dans le dossier frontend et installe les dépendances npm :
-   - Utilise `npm ci` si `package-lock.json` existe (installation reproductible).
-   - Sinon utilise `npm install`.
-   - Génère `package-lock.json` si absent pour les futures installations.
-6. Affiche un récapitulatif final de succès.
+1. Vérifie qu'il n'est pas exécuté en root (opérations en utilisateur standard).
+2. Définit les chemins absolus vers les dossiers backend, frontend et l'environnement Conda.
+3. Vérifie la présence des dossiers et de l'environnement Conda.
+4. Active l'environnement Conda dédié au backend.
+5. Installe ou met à jour les dépendances Python à partir de requirements.txt.
+6. Se positionne dans le frontend et installe les dépendances npm de manière adaptée (npm ci si package-lock.json présent, sinon npm install).
+7. Génère un package-lock.json si absent pour assurer la reproductibilité future.
+8. Affiche un récapitulatif final de succès avec les statuts des installations.
 
 ## Liste des fonctions internes
 
-| Fonction            | Rôle                                                                 |
-|---------------------|----------------------------------------------------------------------|
-| info()              | Affiche un message informatif avec préfixe [INFO]                    |
-| success()           | Affiche un message de succès avec préfixe [OK]                       |
-| error()             | Affiche un message d'erreur avec préfixe [ERREUR] et quitte le script|
+| Fonction  | Rôle                                                                 |
+|-----------|----------------------------------------------------------------------|
+| `info`    | Affiche un message informatif précédé de [INFO]                      |
+| `success` | Affiche un message de succès précédé de [OK]                         |
+| `error`   | Affiche un message d'erreur précédé de [ERREUR] et quitte le script  |
 
 ## Prérequis clairs
-
-- Environnement Conda créé dans `backend/conda` (via create_project.sh)
-- Fichier `backend/requirements.txt` présent
-- Fichier `frontend/package.json` présent
-- Commandes `conda`, `pip` et `npm` disponibles dans le PATH
-- Accès internet pour télécharger les packages
+- Exécution en utilisateur standard (pas de sudo/root).
+- Miniconda installé et accessible (commande `conda` disponible).
+- Structure du projet présente : dossiers `backend/` et `frontend/`, environnement Conda dans `backend/conda`.
+- Fichiers `backend/requirements.txt` et `frontend/package.json` présents.
+- Node.js et npm installés sur la machine.
 
 ## Utilisation précise
-
 ```bash
-chmod +x install_packages.sh
+chmod +x install_packages.sh   # une seule fois
+cd /chemin/vers/votre/projet
 ./install_packages.sh

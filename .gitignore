@@ -46,21 +46,6 @@ yarn-debug.log
 # Project
 /conda
 dist/
-api_dev.sh
-api_start.sh
-api_stop.sh
-github_create_or_clone.sh
-dist_generate.sh
-github_pull.sh
-github_push.sh
-install_packages.sh
-launch_dev.sh
-launch_test_prod.sh
-nginx_reload.sh
-nginx.conf
-npm_dist_generate.sh
-npm_dev.sh
-project.ini
 
 # Secrets (dangereux à committer !)
 .env.local

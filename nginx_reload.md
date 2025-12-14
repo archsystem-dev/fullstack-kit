@@ -1,46 +1,35 @@
-------------------------------------------------------------------------------
-Nom du script       : nginx_reload.sh
-Version             : 1.0.0
-Auteur              : archsystem-dev
-Date de modification: 13 décembre 2025
-Description         : Copie la configuration nginx.conf du projet vers le site
-                      default, valide la syntaxe, active le lien symbolique si
-                      nécessaire et recharge proprement le service Nginx.
-------------------------------------------------------------------------------
+# nginx_reload.sh
+___
 
 ## Objectif du script
-
-Appliquer la configuration Nginx spécifique au projet en copiant nginx.conf vers le site par défaut, en validant la syntaxe et en rechargeant le service sans interruption prolongée.
+Copie la configuration nginx.conf du projet vers le site default, valide la syntaxe, active le lien symbolique si nécessaire et recharge proprement le service Nginx.
 
 ## Ce que fait le script étape par étape
-
-1. Vérifie l'exécution avec sudo.
-2. Récupère les chemins absolus du script et du fichier nginx.conf du projet.
-3. Vérifie l'existence du fichier nginx.conf source.
-4. Arrête temporairement Nginx pour éviter les conflits.
-5. Copie la configuration du projet vers `/etc/nginx/sites-available/default`.
-6. Crée le lien symbolique vers `/etc/nginx/sites-enabled/default` si absent.
-7. Teste la syntaxe de la configuration avec `nginx -t`.
-8. Recharge (ou démarre) le service Nginx.
-9. Affiche un récapitulatif final de succès.
+1. Vérifie l'exécution avec privilèges root (sudo requis).
+2. Définit les chemins absolus vers la configuration projet et les répertoires système Nginx.
+3. Vérifie la présence du fichier nginx.conf dans le répertoire projet.
+4. Arrête temporairement Nginx pour éviter les conflits pendant la copie.
+5. Copie la configuration projet vers /etc/nginx/sites-available/default.
+6. Crée le lien symbolique vers sites-enabled si absent.
+7. Teste la syntaxe de la nouvelle configuration (annule si erreur).
+8. Recharge Nginx (reload) ou démarre si arrêté.
+9. Affiche un récapitulatif final confirmant l'application de la configuration.
 
 ## Liste des fonctions internes
 
-| Fonction            | Rôle                                                                 |
-|---------------------|----------------------------------------------------------------------|
-| info()              | Affiche un message informatif avec préfixe [INFO]                    |
-| success()           | Affiche un message de succès avec préfixe [OK]                       |
-| error()             | Affiche un message d'erreur avec préfixe [ERREUR] et quitte le script|
+| Fonction  | Rôle                                                                 |
+|-----------|----------------------------------------------------------------------|
+| `info`    | Affiche un message informatif précédé de [INFO]                      |
+| `success` | Affiche un message de succès précédé de [OK]                         |
+| `error`   | Affiche un message d'erreur précédé de [ERREUR] et quitte le script  |
 
 ## Prérequis clairs
-
-- Exécution avec `sudo`
-- Fichier `nginx.conf` présent dans le dossier du projet
-- Nginx installé et configuré sur le système (Ubuntu/Debian)
-- Structure standard `/etc/nginx/sites-available` et `/etc/nginx/sites-enabled`
+- Exécution avec `sudo` (obligatoire pour modifications dans /etc/nginx).
+- Fichier `nginx.conf` présent dans le répertoire du projet (racine).
+- Nginx installé et configuré sur le système.
+- Répertoires standards /etc/nginx/sites-available et sites-enabled existants.
 
 ## Utilisation précise
-
 ```bash
-sudo chmod +x nginx_reload.sh
-sudo ./nginx_reload.sh
+chmod +x nginx_reload.sh   # une seule fois
+sudo ./nginx_reload.sh     # obligatoire : exécuter avec sudo

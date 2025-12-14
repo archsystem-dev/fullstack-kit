@@ -1,51 +1,42 @@
-------------------------------------------------------------------------------
-Nom du script       : github_pull.sh
-Version             : 1.0.0
-Auteur              : archsystem-dev
-Date de modification: 13 décembre 2025
-Description         : Met à jour les fichiers locaux depuis le dépôt GitHub distant
-                      en préservant les fichiers non versionnés et en gérant
-                      automatiquement les modifications locales via stash.
-------------------------------------------------------------------------------
+# github_pull.sh
+___
 
 ## Objectif du script
-
-Synchroniser le projet local avec la branche par défaut du dépôt GitHub distant de manière sécurisée, sans supprimer les fichiers non versionnés et en préservant/restaurant les modifications locales.
+Met à jour les fichiers locaux depuis le dépôt GitHub distant en préservant les fichiers non versionnés et en gérant automatiquement les modifications locales via stash.
 
 ## Ce que fait le script étape par étape
-
-1. Vérifie l'environnement (sudo ou non) et récupère les chemins absolus.
-2. Demande confirmation à l'utilisateur avant toute opération.
-3. Lit les paramètres GitHub depuis `project.ini` (user, token obligatoires ; name/email optionnels).
-4. Configure l'identité Git locale.
-5. Vérifie la présence d'un dépôt Git et configure le remote origin avec authentification.
-6. Détecte automatiquement la branche par défaut distante.
-7. Stash automatiquement les modifications locales si présentes.
-8. Passe sur la branche distante, fetch et reset --hard pour synchroniser.
-9. Met à jour les submodules éventuels.
-10. Restaure les modifications locales (stash pop) et signale les conflits éventuels.
-11. Affiche un récapitulatif final de succès.
+1. Vérifie qu'il n'est pas exécuté en root (opérations Git en utilisateur standard).
+2. Convertit les réponses utilisateur en minuscules de façon portable.
+3. Lit les paramètres GitHub depuis `project.ini` avec valeurs par défaut pour name/email.
+4. Demande une confirmation interactive avant toute modification.
+5. Charge les credentials GitHub et configure l'identité Git.
+6. Vérifie la présence d'un dépôt local et configure le remote origin avec token.
+7. Détecte automatiquement la branche par défaut distante.
+8. Stash automatiquement les modifications locales si présentes.
+9. Synchronise forcée avec la branche distante (reset --hard) et met à jour les submodules.
+10. Restaure les modifications locales via stash pop (gère les conflits).
+11. Affiche un récapitulatif final détaillé de la mise à jour.
 
 ## Liste des fonctions internes
 
-| Fonction            | Rôle                                                                 |
-|---------------------|----------------------------------------------------------------------|
-| info()              | Affiche un message informatif avec préfixe [INFO]                    |
-| success()           | Affiche un message de succès avec préfixe [OK]                       |
-| error()             | Affiche un message d'erreur avec préfixe [ERREUR] et quitte le script|
-| to_lowercase()      | Convertit une chaîne en minuscules                                   |
-| get_config_value()  | Lit une valeur dans la section [Github] de project.ini               |
-| confirm_pull()      | Demande confirmation interactive à l'utilisateur                    |
+| Fonction         | Rôle                                                                 |
+|------------------|----------------------------------------------------------------------|
+| `info`           | Affiche un message informatif précédé de [INFO]                      |
+| `success`        | Affiche un message de succès précédé de [OK]                         |
+| `error`          | Affiche un message d'erreur précédé de [ERREUR] et quitte le script  |
+| `to_lowercase`   | Convertit une chaîne en minuscules de façon portable                 |
+| `get_config_value`| Lit une valeur dans project.ini avec fallback sur default si fourni |
+| `confirm_pull`   | Demande confirmation interactive oui/non avant la mise à jour       |
 
 ## Prérequis clairs
-
-- Fichier `project.ini` présent dans le dossier projet avec section `[Github]` contenant au minimum `user` et `token`
-- Dépôt Git local déjà initialisé (`.git` présent)
-- Token GitHub avec permissions de lecture sur le dépôt
-- Commandes `git` et `crudini` disponibles
+- Exécution en utilisateur standard (pas de sudo/root).
+- `crudini` installé pour lire les fichiers .ini.
+- Fichier `project.ini` présent dans le répertoire du projet avec section `[Github]` contenant au minimum `user` et `token`.
+- Dépôt Git local initialisé et lié à un dépôt distant GitHub.
+- Accès internet et token GitHub valide avec droits de lecture.
 
 ## Utilisation précise
-
 ```bash
-chmod +x github_pull.sh
+chmod +x github_pull.sh   # une seule fois
+cd /chemin/vers/votre/projet
 ./github_pull.sh

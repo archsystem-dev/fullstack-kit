@@ -1,37 +1,39 @@
 # github_create_or_clone.sh
+___
 
 ## Objectif du script
-Crée un dépôt privé GitHub s'il n'existe pas ou clone le dépôt existant, initialise Git localement et effectue le premier push en utilisant les identifiants stockés dans `project.ini`.
+Crée un dépôt privé GitHub si inexistant ou clone le dépôt existant, initialise Git localement et effectue le premier push avec les identifiants configurés dans project.ini.
 
 ## Ce que fait le script étape par étape
-1. Détermine les répertoires des scripts et du projet (via arguments ou répertoire courant).
-2. Demande confirmation des répertoires choisis à l'utilisateur.
-3. Crée les répertoires si nécessaire et extrait le nom du projet.
-4. Charge les paramètres GitHub (user, token, name, email) depuis `project.ini`.
-5. Vérifie l'existence du dépôt distant sur GitHub.
-6. Si le dépôt existe : le clone dans le répertoire projet.
-7. Si le dépôt n'existe pas :
-   - Copie les dossiers `backend` et `frontend` (sauf pour le kit de base).
-   - Crée un dépôt privé sur GitHub.
-   - Initialise Git localement, configure les identités, ajoute le remote et effectue le premier commit/push.
-8. Affiche un récapitulatif final avec les informations du dépôt.
+1. Vérifie qu'il n'est pas exécuté en root (opérations Git en utilisateur standard).
+2. Détermine les répertoires des scripts et du projet (via arguments ou répertoire courant).
+3. Affiche et demande confirmation des répertoires choisis.
+4. Extrait le nom du projet et vérifie la présence de `project.ini`.
+5. Charge les paramètres GitHub (user, token, name, email) depuis `project.ini`.
+6. Vérifie l'existence du dépôt distant via l'API GitHub.
+7. Si existant : clone uniquement le répertoire `.git` pour synchroniser.
+8. Si inexistant : copie les templates backend/frontend (sauf pour le kit), crée le dépôt privé distant, initialise Git localement, configure les identités, ajoute le remote, effectue le commit initial et le premier push.
+9. Affiche un récapitulatif final avec les informations du dépôt configuré.
 
 ## Liste des fonctions internes
 
-| Fonction          | Rôle                                                                 |
-|-------------------|----------------------------------------------------------------------|
-| info()            | Affiche un message informatif avec préfixe [INFO]                    |
-| success()         | Affiche un message de succès avec préfixe [OK]                       |
-| error()           | Affiche un message d'erreur avec préfixe [ERREUR] et arrête le script|
-| get_config_value()| Lit une valeur depuis un fichier ini via crudini et gère les erreurs |
+| Fonction           | Rôle                                                                 |
+|--------------------|----------------------------------------------------------------------|
+| `info`             | Affiche un message informatif précédé de [INFO]                      |
+| `success`          | Affiche un message de succès précédé de [OK]                         |
+| `error`            | Affiche un message d'erreur précédé de [ERREUR] et quitte le script  |
+| `get_config_value` | Lit une valeur dans un fichier .ini via crudini et substitue $USER   |
 
-## Prérequis
-- `crudini` installé sur le système.
-- `git` installé et configuré.
-- Fichier `project.ini` présent dans le répertoire projet avec la section `[Github]` contenant les clés `user`, `token`, `name`, `email`.
-- Dossiers `backend` et `frontend` présents dans le répertoire des scripts (sauf pour le kit de base).
+## Prérequis clairs
+- Exécution en utilisateur standard (pas de sudo/root).
+- `crudini` installé pour lire les fichiers .ini.
+- Fichier `project.ini` présent dans le répertoire du projet avec une section `[Github]` contenant les clés `user`, `token`, `name` et `email`.
+- Accès internet et token GitHub valide avec droits de création de dépôts.
+- Pour la création : templates `backend/` et `frontend/` présents dans le répertoire des scripts (sauf si projet nommé "fullstack-kit").
+- Git installé et configuré.
 
-## Utilisation
+## Utilisation précise
 ```bash
-chmod +x github_create_or_clone.sh
-./github_create_or_clone.sh [chemin_scripts] [chemin_projet]
+chmod +x github_create_or_clone.sh   # une seule fois
+./github_create_or_clone.sh [chemin_vers_kit] [chemin_vers_projet]
+# ou sans arguments : utilise le répertoire courant

@@ -1,48 +1,38 @@
-------------------------------------------------------------------------------
-Nom du script       : api_start.sh
-Version             : 1.0.0
-Auteur              : archsystem-dev
-Date de modification: 13 décembre 2025
-Description         : Arrête un éventuel serveur Uvicorn existant, démarre un
-                      nouveau serveur Uvicorn pour le backend FastAPI et
-                      redémarre Nginx pour appliquer les changements.
-------------------------------------------------------------------------------
+# api_start.sh
+___
 
 ## Objectif du script
-
-Démarrer proprement le serveur backend FastAPI avec Uvicorn (en arrêtant d'abord toute instance existante) et redémarrer Nginx pour que la configuration prenne effet.
+Arrête un éventuel serveur Uvicorn existant, démarre un nouveau serveur Uvicorn pour le backend FastAPI en arrière-plan et redémarre Nginx pour appliquer les changements de configuration.
 
 ## Ce que fait le script étape par étape
-
-1. Vérifie que le script est exécuté avec sudo et récupère l'utilisateur réel.
-2. Récupère les chemins absolus du script et du dossier backend.
-3. Active l'environnement Conda dédié au backend.
-4. Arrête tout processus Uvicorn existant (si présent).
-5. Démarre une nouvelle instance de Uvicorn en arrière-plan sur le port 8000.
-6. Attend 2 secondes pour laisser le serveur s'initialiser.
-7. Redémarre le service Nginx.
-8. Effectue des vérifications finales (Uvicorn répond, Nginx actif).
-9. Affiche un message récapitulatif de succès avec un test curl.
+1. Active les options strictes Bash et définit les séparateurs IFS sécurisés.
+2. Définit les fonctions d'affichage standardisées `info`, `success` et `error`.
+3. Calcule les chemins absolus nécessaires (répertoire du script, backend, Miniconda).
+4. Active l'environnement Conda dédié au projet backend.
+5. Arrête gracieusement tout processus Uvicorn existant.
+6. Démarre Uvicorn en arrière-plan sur le port 8000.
+7. Redémarre le service système Nginx.
+8. Effectue des vérifications de santé sur Uvicorn et Nginx.
+9. Affiche un message récapitulatif de succès avec un test rapide de la réponse HTTP.
 
 ## Liste des fonctions internes
 
-| Fonction            | Rôle                                                                 |
-|---------------------|----------------------------------------------------------------------|
-| info()              | Affiche un message informatif avec préfixe [INFO]                    |
-| success()           | Affiche un message de succès avec préfixe [OK]                       |
-| error()             | Affiche un message d'erreur avec préfixe [ERREUR] et quitte le script|
+| Fonction  | Rôle                                                                 |
+|-----------|----------------------------------------------------------------------|
+| `info`    | Affiche un message informatif précédé de [INFO]                      |
+| `success` | Affiche un message de succès précédé de [OK]                         |
+| `error`   | Affiche un message d'erreur précédé de [ERREUR] et quitte le script  |
 
 ## Prérequis clairs
-
-- Exécution avec `sudo`
-- Nginx installé et configuré comme service systemd
-- Miniconda installé dans `/home/$USER/Softwares/miniconda3`
-- Environnement Conda créé dans `backend/conda`
-- Fichier `main.py` contenant l'application FastAPI (variable `app`)
-- Uvicorn installé dans l'environnement Conda
+- Miniconda installé dans `~/Softwares/miniconda3`.
+- Un environnement Conda dédié situé dans `backend/conda`.
+- FastAPI et Uvicorn installés dans cet environnement.
+- Fichier `main.py` contenant l'application FastAPI (objet `app`) dans le répertoire `backend`.
+- Nginx installé et configuré comme reverse proxy vers `localhost:8000`.
+- Droits suffisants pour exécuter `systemctl restart nginx` (généralement via sudo ou appartenance au groupe adéquat).
+- Le script doit être exécuté depuis le répertoire racine du projet (où se trouve le dossier `backend`).
 
 ## Utilisation précise
-
 ```bash
-sudo chmod +x api_start.sh
-sudo ./api_start.sh
+chmod +x api_start.sh   # une seule fois, pour rendre le script exécutable
+./api_start.sh          # ou sudo ./api_start.sh si nécessaire pour Nginx
