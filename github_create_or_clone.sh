@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-___
-
 # ------------------------------------------------------------------------------
 # Nom du script       : github_create_or_clone.sh
 # Version             : 1.0.0

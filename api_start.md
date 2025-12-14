@@ -1,4 +1,5 @@
 # api_start.sh
+___
 
 ## Objectif du script
 Arrête un éventuel serveur Uvicorn existant, démarre un nouveau serveur Uvicorn pour le backend FastAPI en arrière-plan et redémarre Nginx pour appliquer les changements de configuration.

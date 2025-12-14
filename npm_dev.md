@@ -1,4 +1,5 @@
 # npm_dev.sh
+___
 
 ## Objectif du script
 Arrête les processus Node.js/npm existants liés au serveur de développement et lance npm run dev dans le dossier frontend.

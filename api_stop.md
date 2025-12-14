@@ -1,4 +1,5 @@
 # api_stop.sh
+___
 
 ## Objectif du script
 Arrête proprement le serveur Uvicorn du backend FastAPI et redémarre Nginx pour appliquer les changements de configuration (par exemple, retour à une page de maintenance).

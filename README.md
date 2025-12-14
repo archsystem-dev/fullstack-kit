@@ -1,4 +1,5 @@
 # Fullstack Kit – FastAPI + Vue.js (ou React/Vite) + PostgreSQL + Redis + Nginx
+___
 
 Kit de développement et de déploiement complet pour applications web full-stack modernes, conçu pour être simple, reproductible et sécurisé.
 

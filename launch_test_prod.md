@@ -1,4 +1,5 @@
 # launch_test_prod.sh
+___
 
 ## Objectif du script
 Génère la distribution frontend, démarre le serveur backend FastAPI en mode production et recharge Nginx pour déployer l'application en environnement de test/production.

@@ -1,4 +1,5 @@
 # create_project.sh
+___
 
 ## Objectif du script
 Crée un nouveau projet web FastAPI/Vue avec environnements npm (frontend), Conda (backend) et base PostgreSQL, à partir d'une configuration interactive et d'un fichier .ini.

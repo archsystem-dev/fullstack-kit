@@ -1,4 +1,5 @@
 # api_dev.sh
+___
 
 ## Objectif du script
 Arrête un éventuel serveur Uvicorn existant et lance Uvicorn en mode développement (--reload) pour le backend FastAPI, en utilisant l'environnement Conda dédié et en tant qu'utilisateur réel.
