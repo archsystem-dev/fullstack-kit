@@ -1,5 +1,4 @@
 # nginx_reload.sh
-___
 
 ## Objectif du script
 Copie la configuration nginx.conf du projet vers le site default, valide la syntaxe, active le lien symbolique si nécessaire et recharge proprement le service Nginx.

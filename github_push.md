@@ -1,5 +1,4 @@
 # github_push.sh
-___
 
 ## Objectif du script
 Commit et push les modifications locales vers le dépôt GitHub distant avec synchronisation préalable (pull rebase), gestion automatique des stash et message de commit personnalisable.

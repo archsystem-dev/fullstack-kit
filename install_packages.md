@@ -1,5 +1,4 @@
 # install_packages.sh
-___
 
 ## Objectif du script
 Installe les dépendances Python (via pip dans l'environnement Conda dédié) et Node.js (via npm) pour le backend et le frontend du projet, en respectant les fichiers requirements.txt et package.json.
