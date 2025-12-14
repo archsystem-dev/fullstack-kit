@@ -173,8 +173,3 @@ Le kit est conçu pour être étendu :
 ## Licence
 
 MIT – Libre d’utilisation, modification et redistribution.
-
----
-
-**Développé par archsystem-dev**  
-Pour toute question : ouvrir une issue sur ce dépôt.
