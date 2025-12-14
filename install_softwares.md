@@ -1,5 +1,4 @@
 # install_softwares.sh
-___
 
 ## Objectif du script
 Installe et configure Miniconda, PostgreSQL, Redis, Nginx, Node.js/npm avec les paramètres définis dans install_softwares.ini, nettoie les installations précédentes et prépare l'environnement pour les projets full-stack.

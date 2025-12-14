@@ -1,5 +1,4 @@
 # launch_dev.sh
-___
 
 ## Objectif du script
 Ouvre deux terminaux graphiques séparés pour lancer en mode développement le serveur backend FastAPI (via api_dev.sh) et le serveur frontend npm (via npm_dev.sh).

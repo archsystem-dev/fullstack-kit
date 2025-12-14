@@ -1,5 +1,4 @@
 # npm_dist_generate.sh
-___
 
 ## Objectif du script
 Génère la distribution de production du frontend via npm run build, corrige les permissions du dossier dist et autorise www-data (Nginx) à lire les fichiers statiques.

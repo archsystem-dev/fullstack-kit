@@ -1,5 +1,4 @@
 # github_pull.sh
-___
 
 ## Objectif du script
 Met à jour les fichiers locaux depuis le dépôt GitHub distant en préservant les fichiers non versionnés et en gérant automatiquement les modifications locales via stash.

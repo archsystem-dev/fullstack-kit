@@ -1,5 +1,4 @@
 # github_create_or_clone.sh
-___
 
 ## Objectif du script
 Crée un dépôt privé GitHub si inexistant ou clone le dépôt existant, initialise Git localement et effectue le premier push avec les identifiants configurés dans project.ini.
