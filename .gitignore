@@ -47,6 +47,7 @@ yarn-debug.log
 /conda
 /node_modules
 dist/
+project.ini
 
 # Secrets (dangereux à committer !)
 .env.local
