@@ -248,11 +248,11 @@ info "Création des répertoires projet..."
 mkdir -p "$FRONTEND_DIR" "$BACKEND_DIR"
 
 [ -d "$FRONTEND_DIR" ] && {
-    cp "$FRONTEND_DIR" "$PROJECT_DIR/"
+    cp -r "$FRONTEND_DIR" "$PROJECT_DIR/"
 }
 
 [ -d "$BACKEND_DIR" ] && {
-    cp "$BACKEND_DIR" "$PROJECT_DIR/"
+    cp -r "$BACKEND_DIR" "$PROJECT_DIR/"
 }
 
 chown -R "$REAL_USER":"$REAL_GROUP" "$PROJECT_DIR"
