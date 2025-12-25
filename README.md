@@ -22,6 +22,7 @@ mon_projet/
 ├── backend/
 │   ├── conda/              # Environnement Conda dédié
 │   ├── main.py             # Application FastAPI
+│   ├── config.json         # Configuration de base
 │   └── requirements.txt
 │
 ├── frontend/
