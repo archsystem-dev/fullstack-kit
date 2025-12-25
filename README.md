@@ -31,7 +31,7 @@ mon_projet/
 │   ├── package.json
 │   └── App.vue
 │
-├── project.ini             # A créer manuellement
+├── project.ini             # Généré automatiquement (a complèter)
 ├── nginx.conf              # Configuration NGNIX chargé par defaut
 ├── .gitignore
 │
