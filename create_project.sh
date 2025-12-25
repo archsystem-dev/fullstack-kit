@@ -239,6 +239,24 @@ success "Vérifications passées – création possible."
     || error "Fichier conda.sh introuvable dans $MINICA_PATH."
 
 # ------------------------------------------------------------------------------
+# Création des répertoires projet
+# ------------------------------------------------------------------------------
+
+# Création de la structure de répertoires
+info "Création des répertoires projet..."
+
+[ -d "$FRONTEND_DIR" ] && {
+    cp "$FRONTEND_DIR" "$PROJECT_DIR/"
+}
+
+[ -d "$BACKEND_DIR" ] && {
+    cp "$BACKEND_DIR" "$PROJECT_DIR/"
+}
+
+chown -R "$REAL_USER":"$REAL_GROUP" "$PROJECT_DIR"
+chmod -R 755 "$PROJECT_DIR"
+
+# ------------------------------------------------------------------------------
 # Initialisation npm (frontend)
 # ------------------------------------------------------------------------------
 
@@ -304,14 +322,6 @@ done
 
 [ -f "$SCRIPT_DIR/gitignore.conf" ] && {
     cp "$SCRIPT_DIR/gitignore.conf" "$PROJECT_DIR/.gitignore"
-}
-
-[ -d "$FRONTEND_DIR" ] && {
-    cp "$FRONTEND_DIR" "$PROJECT_DIR/"
-}
-
-[ -d "$BACKEND_DIR" ] && {
-    cp "$BACKEND_DIR" "$PROJECT_DIR/"
 }
 
 # ------------------------------------------------------------------------------
