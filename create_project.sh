@@ -313,27 +313,57 @@ done
     sed -i "s|{PROJECT_DIR}|${PROJECT_DIR}|g" "$PROJECT_DIR/nginx.conf"
 }
 
-[ -f "$SCRIPT_DIR/project.ini" ] && {
-    cp "$SCRIPT_DIR/project.ini" "$PROJECT_DIR/project.ini"
-}
-
 [ -f "$SCRIPT_DIR/gitignore.conf" ] && {
     cp "$SCRIPT_DIR/gitignore.conf" "$PROJECT_DIR/.gitignore"
 }
 
+# ------------------------------------------------------------------------------
+# Création d'un project.ini
+# ------------------------------------------------------------------------------
+
+PROJECT_INI="$PROJECT_DIR/project.ini"
+cat > "$PROJECT_INI" << 'EOF'
+[Github]
+user=
+token=
+name=
+email=
+
+[General]
+EOF
+
+# ------------------------------------------------------------------------------
+# Mise à jour simple de backend/config.json (fichier déjà présent)
+# ------------------------------------------------------------------------------
+
+info "Mise à jour de backend/config.json..."
+
+CONFIG_JSON="$BACKEND_DIR/config.json"
+
+# Vérif existence (sécurité minimale)
+[ -f "$CONFIG_JSON" ] || error "Le fichier $CONFIG_JSON n'existe pas dans le template backend !"
+
+# Récupération Redis depuis install_softwares.ini (via fonction existante)
+REDIS_PASSWORD=$(get_config_value "$CONFIG_INSTALL_FILE" Redis password || echo "secure_password_123")
+REDIS_PORT=$(get_config_value "$CONFIG_INSTALL_FILE" Redis port || echo "6379")
+REDIS_DB=$(get_config_value "$CONFIG_INSTALL_FILE" Redis db || echo "0")
+
+# Échappement basique des caractères problématiques pour sed (/ & \)
+ESC_PG_PASSWORD=$(echo "$PG_PASSWORD" | sed 's/[\/&]/\\&/g')
+ESC_REDIS_PASSWORD=$(echo "$REDIS_PASSWORD" | sed 's/[\/&]/\\&/g')
+
+# Mise à jour des 6 lignes concernées avec sed (style déjà utilisé dans le script)
+sed -i "s/\"DB_NAME\": *\"[^\"]*\"/\"DB_NAME\": \"$DB_NAME\"/"     "$CONFIG_JSON"
+sed -i "s/\"DB_USER\": *\"[^\"]*\"/\"DB_USER\": \"$PG_USER\"/"     "$CONFIG_JSON"
+sed -i "s/\"DB_PASSWORD\": *\"[^\"]*\"/\"DB_PASSWORD\": \"$ESC_PG_PASSWORD\"/" "$CONFIG_JSON"
+
+sed -i "s/\"REDIS_PORT\": *[0-9]*/\"REDIS_PORT\": $REDIS_PORT/"    "$CONFIG_JSON"
+sed -i "s/\"REDIS_PASSWORD\": *\"[^\"]*\"/\"REDIS_PASSWORD\": \"$ESC_REDIS_PASSWORD\"/" "$CONFIG_JSON"
+sed -i "s/\"REDIS_DB\": *[0-9]*/\"REDIS_DB\": $REDIS_DB/"          "$CONFIG_JSON"
+
 # Ajustement final des permissions
 sudo chown -R "$REAL_USER":"$REAL_GROUP" "$PROJECT_DIR/"
 sudo chmod -R 755 "$PROJECT_DIR/"
-
-# Insertion du bloc PostgreSQL au début de project.ini
-PROJECT_INI="$PROJECT_DIR/project.ini"
-POSTGRESQL_BLOCK="[PostgreSQL]
-database=$DB_NAME
-user=$PG_USER
-password_default=$PG_PASSWORD
-
-"
-{ echo "$POSTGRESQL_BLOCK"; cat "$PROJECT_INI"; } > "${PROJECT_INI}.tmp" && mv "${PROJECT_INI}.tmp" "$PROJECT_INI"
 
 # Nettoyage du package-lock.json généré inutilement
 rm -f "$FRONTEND_DIR/package-lock.json"
