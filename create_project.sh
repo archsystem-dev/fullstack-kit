@@ -219,6 +219,8 @@ MINICONDA_PATH=$(get_config_value "$CONFIG_INSTALL_FILE" Miniconda install_dir)
 PROJECT_DIR="$PROJECTS_DIR/$PROJECT_NAME"
 FRONTEND_DIR="$PROJECT_DIR/frontend"
 BACKEND_DIR="$PROJECT_DIR/backend"
+ORIGIN_FRONTEND_DIR="$SCRIPT_DIR/frontend"
+ORIGIN_BACKEND_DIR="$SCRIPT_DIR/backend"
 DB_NAME="$PG_DB_PREFIX$PROJECT_NAME"
 PG_USER="$PG_USER_PREFIX$PROJECT_NAME"
 
@@ -247,12 +249,12 @@ info "Création des répertoires projet..."
 
 mkdir -p "$PROJECT_DIR"
 
-[ -d "$FRONTEND_DIR" ] && {
-    cp -r "$FRONTEND_DIR" "$PROJECT_DIR/"
+[ -d "$ORIGIN_FRONTEND_DIR" ] && {
+    cp -r "$ORIGIN_FRONTEND_DIR" "$PROJECT_DIR/"
 }
 
-[ -d "$BACKEND_DIR" ] && {
-    cp -r "$BACKEND_DIR" "$PROJECT_DIR/"
+[ -d "$ORIGIN_BACKEND_DIR" ] && {
+    cp -r "$ORIGIN_BACKEND_DIR" "$PROJECT_DIR/"
 }
 
 chown -R "$REAL_USER":"$REAL_GROUP" "$PROJECT_DIR"
