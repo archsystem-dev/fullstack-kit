@@ -91,9 +91,8 @@ if [[ $# -eq 2 ]] && [[ -d "$1" ]] && [[ -d "$2" ]]; then
     PROJECT_DIR="$(realpath -m "$2")"
 else
     # Fallback sur le répertoire courant si arguments absents ou invalides
-    CURRENT_DIR="$(realpath -m .)"
-    SCRIPT_DIR="$CURRENT_DIR"
-    PROJECT_DIR="$CURRENT_DIR"
+    SCRIPT_DIR="$(pwd)"
+    PROJECT_DIR="$(pwd)"
 
     # Avertissement si des arguments ont été fournis mais sont incorrects
     if [[ $# -ne 0 ]]; then

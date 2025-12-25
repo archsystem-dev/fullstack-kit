@@ -118,8 +118,7 @@ REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
 REAL_GROUP="$(id -gn "$REAL_USER")"
 
 # Chemin absolu du script et de son répertoire
-SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+SCRIPT_DIR="$(pwd)"
 # Fichier de configuration globale
 CONFIG_INSTALL_FILE="$SCRIPT_DIR/install_softwares.ini"
 

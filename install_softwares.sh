@@ -112,8 +112,7 @@ success "Utilisateur réel : $REAL_USER (home: $USER_HOME, groupe: $REAL_GROUP)"
 # ------------------------------------------------------------------------------
 
 # Chemin absolu du script et de son répertoire
-SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+SCRIPT_DIR="$(pwd)"
 # Fichier de configuration global
 CONFIG_FILE="$SCRIPT_DIR/install_softwares.ini"
 

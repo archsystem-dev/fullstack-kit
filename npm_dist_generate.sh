@@ -70,7 +70,7 @@ success "Exécution en utilisateur standard confirmée"
 # ------------------------------------------------------------------------------
 
 # Répertoire courant normalisé (racine du projet)
-SCRIPT_DIR="$(realpath -m .)"
+SCRIPT_DIR="$(pwd)"
 # Chemin vers le répertoire frontend
 FRONTEND_DIR="$SCRIPT_DIR/frontend"
 # Chemin vers le dossier de distribution généré

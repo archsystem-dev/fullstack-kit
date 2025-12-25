@@ -99,10 +99,7 @@ open_terminal_and_run() {
 # Chemins absolus et vérification des scripts
 # ------------------------------------------------------------------------------
 
-# Chemin absolu du script courant
-SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-# Répertoire contenant le script (racine du projet)
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+SCRIPT_DIR="$(pwd)"
 
 # Chemins vers les scripts de développement
 API_DEV_SCRIPT="$SCRIPT_DIR/api_dev.sh"

@@ -70,7 +70,7 @@ success "Exécution en utilisateur standard confirmée"
 # ------------------------------------------------------------------------------
 
 # Répertoire courant normalisé (racine du projet)
-SCRIPT_DIR="$(realpath -m .)"
+SCRIPT_DIR="$(pwd)"
 
 # Chemins vers les scripts dépendants
 NPM_DIST_SCRIPT="$SCRIPT_DIR/npm_dist_generate.sh"

@@ -137,8 +137,7 @@ confirm_push() {
 # ------------------------------------------------------------------------------
 
 # Chemin absolu du script et de son répertoire
-SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+SCRIPT_DIR="$(pwd)"
 # Fichier de configuration du projet
 CONFIG_PROJECT="$SCRIPT_DIR/project.ini"
 

@@ -69,7 +69,7 @@ success "Privilèges root confirmés"
 # ------------------------------------------------------------------------------
 
 # Répertoire courant normalisé (racine du projet)
-SCRIPT_DIR="$(realpath -m .)"
+SCRIPT_DIR="$(pwd)"
 
 # Chemin source de la configuration projet
 SOURCE_CONF="$SCRIPT_DIR/nginx.conf"

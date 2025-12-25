@@ -59,7 +59,7 @@ mon_projet/
 - Connexion internet
 
 ## Installation initiale du kit (une seule fois)
-
+Modifier les fichiers install_softwares.ini et nginx.conf avec vos paramètres.
 ```bash
 # Cloner le kit
 git clone https://github.com/votre-user/fullstack-kit.git

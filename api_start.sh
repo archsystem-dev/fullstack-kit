@@ -59,7 +59,7 @@ error() {
 
 # Détermination du répertoire contenant le script
 # Pourquoi : garantit des chemins fiables quel que soit le cwd
-SCRIPT_DIR="$(realpath -m .)"
+SCRIPT_DIR="$(pwd)"
 # Répertoire du projet backend FastAPI
 BACKEND_DIR="$SCRIPT_DIR/backend"
 

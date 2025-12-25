@@ -62,7 +62,7 @@ error() {
 
 # Obtention du répertoire contenant le script (même si lancé depuis ailleurs)
 # Pourquoi : permet d'avoir des chemins fiables indépendamment du cwd.
-SCRIPT_DIR="$(realpath -m .)"
+SCRIPT_DIR="$(pwd)"
 
 # Répertoire du backend FastAPI
 # Pourquoi : centralise le chemin du projet backend pour réutilisation.
