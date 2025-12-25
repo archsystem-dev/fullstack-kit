@@ -245,6 +245,8 @@ success "Vérifications passées – création possible."
 # Création de la structure de répertoires
 info "Création des répertoires projet..."
 
+mkdir -p "$PROJECT_DIR"
+
 [ -d "$FRONTEND_DIR" ] && {
     cp -r "$FRONTEND_DIR" "$PROJECT_DIR/"
 }
