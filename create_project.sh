@@ -334,7 +334,7 @@ success "PostgreSQL configuré"
 
 # Création des liens vers les scripts du kit
 info "Création des liens symboliques vers les scripts du kit..."
-for script in install_packages.sh api_dev.sh api_start.sh api_stop.sh \
+for script in condactivate.sh install_packages.sh api_dev.sh api_start.sh api_stop.sh \
               nginx_reload.sh npm_dist_generate.sh github_create_or_clone.sh \
               github_push.sh github_pull.sh launch_dev.sh launch_test_prod.sh \
               npm_dev.sh; do
