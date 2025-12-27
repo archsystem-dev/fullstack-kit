@@ -105,8 +105,8 @@ confirm_pull() {
     echo "         MISE À JOUR DU PROJET DEPUIS GITHUB                "
     echo "════════════════════════════════════════════════════════════"
     echo ""
-    printf " %-18s : %s\n" "Utilisateur" "${REAL_USER:-$USER}"
-    printf " %-18s : %s\n" "Dossier projet" "$SCRIPT_DIR"
+    printf " %-24s : %s\n" "Utilisateur" "${REAL_USER:-$USER}"
+    printf " %-24s : %s\n" "Dossier projet" "$SCRIPT_DIR"
     echo ""
     echo " Cette opération va synchroniser les fichiers avec le dépôt distant."
     echo " Les fichiers non versionnés restent intacts."
@@ -238,18 +238,20 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
 fi
 
 # ------------------------------------------------------------------------------
-# Mise à jour forcée depuis la branche distante
+# Synchronisation avec le dépôt distant (pull --rebase)
 # ------------------------------------------------------------------------------
 
-# Synchronisation forcée avec la branche distante
-info "Synchronisation avec origin/$DEFAULT_BRANCH..."
-git checkout "$DEFAULT_BRANCH" 2>/dev/null || git switch -c "$DEFAULT_BRANCH" --track "origin/$DEFAULT_BRANCH"
-git fetch origin "$DEFAULT_BRANCH" --quiet
-git reset --hard "origin/$DEFAULT_BRANCH" --quiet
+info "Synchronisation avec origin/$DEFAULT_BRANCH (pull --rebase)..."
+if ! git pull --rebase origin "$DEFAULT_BRANCH"; then
+    error "Échec du rebase → opération annulée"
+    [[ "$STASHED" = true ]] && git stash pop --quiet
+    exit 1
+fi
+
+# Optionnel : mise à jour des submodules (cohérent avec l'ancien code)
 git submodule update --init --recursive --quiet 2>/dev/null || true
 
-# Confirmation de la synchronisation
-success "Projet synchronisé avec le dépôt distant"
+success "Synchronisation réussie"
 
 # ------------------------------------------------------------------------------
 # Restauration des modifications locales
@@ -276,10 +278,10 @@ echo "════════════════════════�
 echo "             MISE À JOUR GITHUB TERMINÉE AVEC SUCCÈS        "
 echo "════════════════════════════════════════════════════════════"
 echo ""
-printf " %-18s : %s\n" "Projet" "$PROJECT_NAME"
-printf " %-18s : %s\n" "Branche" "$DEFAULT_BRANCH"
-printf " %-18s : %s\n" "Commit actuel" "$(git rev-parse --short HEAD)"
-printf " %-18s : %s\n" "Dépôt distant" "https://github.com/$GIT_USER/$PROJECT_NAME"
+printf " %-24s : %s\n" "Projet" "$PROJECT_NAME"
+printf " %-24s : %s\n" "Branche" "$DEFAULT_BRANCH"
+printf " %-24s : %s\n" "Commit actuel" "$(git rev-parse --short HEAD)"
+printf " %-24s : %s\n" "Dépôt distant" "https://github.com/$GIT_USER/$PROJECT_NAME"
 echo ""
 echo " Les fichiers non versionnés sont préservés."
 echo " Vos modifications locales ont été restaurées (si conflits → à résoudre)."

@@ -111,8 +111,8 @@ echo "════════════════════════�
 echo "           CONFIGURATION DES RÉPERTOIRES                    "
 echo "════════════════════════════════════════════════════════════"
 echo ""
-printf " %-18s : %s\n" "Répertoire scripts" "$SCRIPT_DIR"
-printf " %-18s : %s\n" "Répertoire projet"  "$PROJECT_DIR"
+printf " %-24s : %s\n" "Répertoire scripts" "$SCRIPT_DIR"
+printf " %-24s : %s\n" "Répertoire projet"  "$PROJECT_DIR"
 echo ""
 echo "Le script va utiliser ces deux répertoires."
 # Demande de confirmation explicite à l'utilisateur
@@ -247,9 +247,9 @@ echo "          DÉPÔT GITHUB CONFIGURÉ AVEC SUCCÈS                 "
 echo "════════════════════════════════════════════════════════════"
 echo ""
 
-printf " %-18s : %s\n" "Projet" "$PROJECT_NAME"
-printf " %-18s : %s\n" "Utilisateur GitHub" "$GIT_USER"
-printf " %-18s : %s\n" "URL du dépôt" "https://github.com/$GIT_USER/$PROJECT_NAME"
+printf " %-24s : %s\n" "Projet" "$PROJECT_NAME"
+printf " %-24s : %s\n" "Utilisateur GitHub" "$GIT_USER"
+printf " %-24s : %s\n" "URL du dépôt" "https://github.com/$GIT_USER/$PROJECT_NAME"
 
 echo ""
 echo " Le dépôt est prêt à l'emploi (créé ou cloné)."
