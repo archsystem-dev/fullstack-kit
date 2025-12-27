@@ -365,12 +365,12 @@ email=$GH_MAIL
 EOF
 
 # ------------------------------------------------------------------------------
-# Mise à jour simple de backend/config.json (fichier déjà présent)
+# Mise à jour simple de backend/backend.config.json (fichier déjà présent)
 # ------------------------------------------------------------------------------
 
-info "Mise à jour de backend/config.json..."
+info "Mise à jour de backend/backend.config.json..."
 
-CONFIG_JSON="$BACKEND_DIR/config.json"
+CONFIG_JSON="$BACKEND_DIR/backend.config.json"
 
 # Vérif existence (sécurité minimale)
 [ -f "$CONFIG_JSON" ] || error "Le fichier $CONFIG_JSON n'existe pas dans le template backend !"
