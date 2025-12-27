@@ -6,7 +6,7 @@
 # Date de modification: 14 décembre 2025
 # Description         : Crée un dépôt privé GitHub si inexistant ou clone le dépôt
 #                       existant, initialise Git localement et effectue le premier
-#                       push avec les identifiants configurés dans project.ini.
+#                       push avec les identifiants configurés dans github.ini.
 # ------------------------------------------------------------------------------
 
 # Activation des options strictes pour une exécution robuste et sécurisée
@@ -143,17 +143,17 @@ PROJECT_NAME="$(basename "$PROJECT_DIR")"
 cd "$SCRIPT_DIR" || error "Impossible d'accéder à $SCRIPT_DIR"
 
 # Chemin complet vers le fichier de configuration du projet
-CONFIG_PROJECT="$PROJECT_DIR/project.ini"
+CONFIG_PROJECT="$PROJECT_DIR/github.ini"
 
 # Vérification de la présence du fichier ini obligatoire
 [[ -f "$CONFIG_PROJECT" ]] || error "Fichier de configuration manquant : $CONFIG_PROJECT"
 
 # ------------------------------------------------------------------------------
-# Chargement des paramètres GitHub depuis project.ini
+# Chargement des paramètres GitHub depuis github.ini
 # ------------------------------------------------------------------------------
 
 # Information sur le chargement des credentials
-info "Lecture des paramètres GitHub depuis project.ini..."
+info "Lecture des paramètres GitHub depuis github.ini..."
 
 # Extraction sécurisée des valeurs requises
 GIT_USER=$(get_config_value "$CONFIG_PROJECT" Github user)

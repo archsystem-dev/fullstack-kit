@@ -31,7 +31,7 @@ mon_projet/
 │   ├── package.json
 │   └── App.vue
 │
-├── project.ini             # Généré automatiquement (a complèter)
+├── github.ini             # Généré automatiquement (a complèter)
 ├── nginx.conf              # Configuration NGNIX chargé par defaut
 ├── .gitignore
 │
@@ -77,7 +77,7 @@ Le script demande confirmation à chaque étape critique et nettoie les installa
 
 ## Création d’un nouveau projet
 
-Remplir le fichier project.ini avec vos paramètres GITHUB.
+Remplir le fichier github.ini avec vos paramètres GITHUB.
 
 ```bash
 # Depuis le répertoire du kit
@@ -161,7 +161,7 @@ Arrête Uvicorn et recharge Nginx (utile pour page de maintenance).
 ## Configuration
 
 - `install_softwares.ini` : paramètres globaux (chemins, ports, mots de passe…)
-- `project.ini` (créé automatiquement) : token GitHub, credentials PostgreSQL…
+- `github.ini` (créé automatiquement) : token GitHub, credentials PostgreSQL…
 
 ## Contribution & Personnalisation
 

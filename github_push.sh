@@ -73,7 +73,7 @@ to_lowercase() {
 # ------------------------------------------------------------------------------
 # Fonction : get_config_value()
 # Liste des Paramètres : $1 → clé dans la section [Github], $2 → valeur par défaut (optionnel)
-# Description          : Lit une valeur dans project.ini via crudini (valeurs
+# Description          : Lit une valeur dans github.ini via crudini (valeurs
 #                       optionnelles pour name/email avec valeurs par défaut)
 # ------------------------------------------------------------------------------
 get_config_value() {
@@ -84,7 +84,7 @@ get_config_value() {
     if [[ -z "$val" && -n "$default" ]]; then
         echo "$default"
     elif [[ -z "$val" ]]; then
-        error "Clé '$key' manquante dans la section [Github] de project.ini"
+        error "Clé '$key' manquante dans la section [Github] de github.ini"
     else
         echo "$val"
     fi
@@ -139,10 +139,10 @@ confirm_push() {
 # Chemin absolu du script et de son répertoire
 SCRIPT_DIR="$(pwd)"
 # Fichier de configuration du projet
-CONFIG_PROJECT="$SCRIPT_DIR/project.ini"
+CONFIG_PROJECT="$SCRIPT_DIR/github.ini"
 
 # Vérification de la présence du fichier ini
-[[ -f "$CONFIG_PROJECT" ]] || error "Fichier project.ini manquant dans $SCRIPT_DIR"
+[[ -f "$CONFIG_PROJECT" ]] || error "Fichier github.ini manquant dans $SCRIPT_DIR"
 
 # Détermination de l'utilisateur réel (gestion sudo)
 if [[ "$EUID" -eq 0 && -n "${SUDO_USER:-}" ]]; then
@@ -159,7 +159,7 @@ fi
 confirm_push
 
 # ------------------------------------------------------------------------------
-# Lecture des paramètres GitHub depuis project.ini
+# Lecture des paramètres GitHub depuis github.ini
 # ------------------------------------------------------------------------------
 
 # Information sur le chargement des credentials

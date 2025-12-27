@@ -47,7 +47,7 @@ yarn-debug.log
 /conda
 /node_modules
 dist/
-project.ini
+github.ini
 
 # Secrets (dangereux à committer !)
 .env.local

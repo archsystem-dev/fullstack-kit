@@ -36,7 +36,7 @@ Crée un nouveau projet web FastAPI/Vue avec environnements npm (frontend), Cond
 - `crudini` installé pour lire les fichiers .ini.
 - Fichier `install_softwares.ini` présent dans le même répertoire que le script.
 - Scripts du kit (listés dans la boucle) présents dans le répertoire du script.
-- Fichiers `nginx.conf`, `project.ini`, `gitignore.conf` présents.
+- Fichiers `nginx.conf`, `github.ini`, `gitignore.conf` présents.
 - Accès GitHub configuré pour l'utilisateur réel (pour le script github_create_or_clone.sh).
 
 ## Utilisation précise

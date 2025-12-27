@@ -145,6 +145,9 @@ project_config() {
     # Boucle principale jusqu'à validation
     while true; do
         # Saisie du nom du projet (converti en minuscules)
+        echo "# Paramètres Généraux :"
+        echo ""
+        # Saisie du nom du project
         read -rp " Nom du projet (PROJECT_NAME) : " INPUT_PROJECT_NAME
         PROJECT_NAME=$(to_lowercase "$INPUT_PROJECT_NAME")
 
@@ -153,6 +156,21 @@ project_config() {
 
         # Saisie du mot de passe PostgreSQL
         read -rp " Mot de passe par défaut PostgreSQL : " PG_PASSWORD
+        echo ""
+        echo "# Paramètres Github :"
+        echo ""
+        # Saisie du user Github
+        read -rp " User : " GH_USER
+
+        # Saisie du token Github
+        read -rp " Token : " GH_TOKEN
+
+        # Saisie du nom affiché de l'utilisateur du Github
+        read -rp " Name : " GH_NAME
+
+        # Saisie du mail du user du Github
+        read -rp " Email : " GH_MAIL
+
         echo ""
 
         # Récapitulatif de la configuration saisie
@@ -166,6 +184,11 @@ project_config() {
         printf " %-18s : %s\n" "PG_DATABASE" "$PG_DB_PREFIX$PROJECT_NAME"
         printf " %-18s : %s\n" "PG_USER" "$PG_USER_PREFIX$PROJECT_NAME"
         printf " %-18s : %s\n" "PG_PASSWORD" "$PG_PASSWORD"
+        echo "────────────────────────────────────────────────────────────"
+        printf " %-18s : %s\n" "GH_USER" "$GH_USER"
+        printf " %-18s : %s\n" "GH_TOKEN" "$GH_TOKEN"
+        printf " %-18s : %s\n" "GH_NAME" "$GH_NAME"
+        printf " %-18s : %s\n" "GH_MAIL" "$GH_MAIL"
         echo "════════════════════════════════════════════════════════════"
         echo ""
 
@@ -329,18 +352,16 @@ done
 }
 
 # ------------------------------------------------------------------------------
-# Création d'un project.ini
+# Création d'un github.ini
 # ------------------------------------------------------------------------------
 
-PROJECT_INI="$PROJECT_DIR/project.ini"
-cat > "$PROJECT_INI" << 'EOF'
+PROJECT_INI="$PROJECT_DIR/github.ini"
+cat > "$PROJECT_INI" << EOF
 [Github]
-user=
-token=
-name=
-email=
-
-[General]
+user=$GH_USER
+token=$GH_TOKEN
+name=$GH_NAME
+email=$GH_MAIL
 EOF
 
 # ------------------------------------------------------------------------------

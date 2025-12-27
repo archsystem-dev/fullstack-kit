@@ -6,7 +6,7 @@ Met à jour les fichiers locaux depuis le dépôt GitHub distant en préservant 
 ## Ce que fait le script étape par étape
 1. Vérifie qu'il n'est pas exécuté en root (opérations Git en utilisateur standard).
 2. Convertit les réponses utilisateur en minuscules de façon portable.
-3. Lit les paramètres GitHub depuis `project.ini` avec valeurs par défaut pour name/email.
+3. Lit les paramètres GitHub depuis `github.ini` avec valeurs par défaut pour name/email.
 4. Demande une confirmation interactive avant toute modification.
 5. Charge les credentials GitHub et configure l'identité Git.
 6. Vérifie la présence d'un dépôt local et configure le remote origin avec token.
@@ -24,13 +24,13 @@ Met à jour les fichiers locaux depuis le dépôt GitHub distant en préservant 
 | `success`        | Affiche un message de succès précédé de [OK]                         |
 | `error`          | Affiche un message d'erreur précédé de [ERREUR] et quitte le script  |
 | `to_lowercase`   | Convertit une chaîne en minuscules de façon portable                 |
-| `get_config_value`| Lit une valeur dans project.ini avec fallback sur default si fourni |
+| `get_config_value`| Lit une valeur dans github.ini avec fallback sur default si fourni |
 | `confirm_pull`   | Demande confirmation interactive oui/non avant la mise à jour       |
 
 ## Prérequis clairs
 - Exécution en utilisateur standard (pas de sudo/root).
 - `crudini` installé pour lire les fichiers .ini.
-- Fichier `project.ini` présent dans le répertoire du projet avec section `[Github]` contenant au minimum `user` et `token`.
+- Fichier `github.ini` présent dans le répertoire du projet avec section `[Github]` contenant au minimum `user` et `token`.
 - Dépôt Git local initialisé et lié à un dépôt distant GitHub.
 - Accès internet et token GitHub valide avec droits de lecture.
 
